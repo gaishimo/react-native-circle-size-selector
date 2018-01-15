@@ -19,7 +19,7 @@ type Props = {
   minValue: number,
   maxValue: number,
   initialValue: number,
-  showGraduationLines: boolean,
+  showGraduationLinesOnResizing: boolean,
   onSelect: Function,
   outermostCircleStyle: StyleObj,
   graduationLineCircleStyle: StyleObj,
@@ -28,7 +28,7 @@ type Props = {
 }
 
 type DefaultProps = {
-  showGraduationLines: boolean,
+  showGraduationLinesOnResizing: boolean,
   outermostCircleStyle: StyleObj,
   graduationLineCircleStyle: StyleObj,
   currentValueCircleStyle: StyleObj,
@@ -65,7 +65,7 @@ export default class CircleNumberSelector extends Component<Props, State> {
   }
 
   static defaultProps: DefaultProps = {
-    showGraduationLines: true,
+    showGraduationLinesOnResizing: true,
     outermostCircleStyle: defaultStyles.outermostCircle,
     graduationLineCircleStyle: defaultStyles.graduationLineCircle,
     currentValueCircleStyle: defaultStyles.currentValueCircle,
@@ -204,7 +204,7 @@ export default class CircleNumberSelector extends Component<Props, State> {
         {this.valuesInRange.reverse().map((v, i) => {
           const radius = this.radiusAtValue(v)
           const isOutermost = v === this.props.maxValue
-          const shouldShowGraduationLine = resizing && this.props.showGraduationLines
+          const shouldShowGraduationLine = resizing && this.props.showGraduationLinesOnResizing
           return (
             <Circle
               key={`circle-${i}`}
