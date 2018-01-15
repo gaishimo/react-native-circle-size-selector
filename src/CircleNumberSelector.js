@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react'
+import * as React from 'react'
 import { StyleSheet, View, PanResponder } from 'react-native'
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
 import Circle from './Circle'
@@ -26,6 +26,7 @@ type Props = {
   graduationLineCircleStyle: StyleObj,
   currentValueCircleStyle: StyleObj,
   resizingCurrentValueCircleStyle: StyleObj,
+  children?: React.Node,
 }
 
 type DefaultProps = {
@@ -58,7 +59,7 @@ const defaultStyles = StyleSheet.create({
   },
 })
 
-export default class CircleNumberSelector extends Component<Props, State> {
+export default class CircleNumberSelector extends React.Component<Props, State> {
   props: Props
   state = {
     value: this.props.initialValue,
@@ -237,6 +238,7 @@ export default class CircleNumberSelector extends Component<Props, State> {
           ]}
           {...this._panResponder.panHandlers}
         />
+        {children}
       </View>
     )
   }
@@ -246,5 +248,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })
