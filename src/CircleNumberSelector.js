@@ -18,6 +18,7 @@ type State = {
 type Props = {
   minValue: number,
   maxValue: number,
+  manualValues: ?number[],
   initialValue: number,
   showGraduationLinesOnResizing: boolean,
   onChange: (value: number) => void,
@@ -30,6 +31,7 @@ type Props = {
 }
 
 type DefaultProps = {
+  manualValues: ?number[],
   showGraduationLinesOnResizing: boolean,
   onChange: (value: number) => void,
   onSelected: (value: number) => void,
@@ -69,6 +71,7 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
   }
 
   static defaultProps: DefaultProps = {
+    manualValues: null,
     showGraduationLinesOnResizing: true,
     outermostCircleStyle: defaultStyles.outermostCircle,
     graduationLineCircleStyle: defaultStyles.graduationLineCircle,
@@ -83,6 +86,15 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
   _tapStartPosition: ?Position
   _previousPosition: ?Position
 
+  get minValue (): number {
+    if (this.props.manualValues == null) { return this.props.minValue }
+    return Math.min(...this.props.manualValues)
+  }
+  get maxValue (): number {
+    if (this.props.manualValues == null) { return this.props.maxValue }
+    return Math.max(...this.props.manualValues)
+  }
+
   get maxArea (): number {
     const radius = this.maxRadius
     return radius * radius * Math.PI
@@ -95,7 +107,11 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
   }
 
   get valuesInRange (): number[] {
-    const { minValue, maxValue } = this.props
+    const { minValue, maxValue, manualValues } = this.props
+    if (manualValues != null) {
+      const sorted = manualValues.slice().sort((n1, n2) => { return n1 - n2 })
+      return sorted
+    }
     return range(minValue, maxValue)
   }
 
@@ -130,11 +146,11 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
   selectValueFromRadius (radius: number) {
     const found = this.valuesInRange.find(v => this.radiusAtValue(v) >= radius)
     if (found != null) { return found }
-    return this.props.maxValue
+    return this.maxValue
   }
 
   getAreaAtValue (value: number): number {
-    return this.maxArea * (value / this.props.maxValue)
+    return this.maxArea * (value / this.maxValue)
   }
 
   clear () {
@@ -160,7 +176,6 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
       x: leftTop.x + locationX,
       y: leftTop.y + locationY,
     }
-    console.log('tapStartPosition:', this._tapStartPosition)
   }
 
   onPanResponderMove = (e: Object, gestureState: GestureState) => {
@@ -215,11 +230,11 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
       <View style={styles.container} onLayout={this.onLayout}>
         {valuesInRange.reverse().map((v, i) => {
           const radius = this.radiusAtValue(v)
-          const isOutermost = v === this.props.maxValue
+          const isOutermost = v === this.maxValue
           const shouldShowGraduationLine =
             resizing && this.props.showGraduationLinesOnResizing
           if (!isOutermost && !shouldShowGraduationLine) { return null }
-          if (!isOutermost && this.valuesInRange.length > 30) {
+          if (!isOutermost && valuesLength > 30) {
             if (i % (valuesLength / 10) !== 0) {
               return null
             }
