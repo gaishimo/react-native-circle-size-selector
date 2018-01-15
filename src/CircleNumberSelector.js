@@ -20,7 +20,6 @@ type Props = {
   maxValue: number,
   initialValue: number,
   showGraduationLinesOnResizing: boolean,
-  onSelect: Function,
   outermostCircleStyle: StyleObj,
   graduationLineCircleStyle: StyleObj,
   currentValueCircleStyle: StyleObj,
@@ -184,13 +183,6 @@ export default class CircleNumberSelector extends Component<Props, State> {
     this.setState({ resizing: false })
   }
 
-  onPressCircle (value: number) {
-    this._value = value
-    this._previousPosition = null
-    this._tapStartPosition = null
-    this.setState({ value })
-  }
-
   render () {
     const { resizing } = this.state
     const {
@@ -215,7 +207,6 @@ export default class CircleNumberSelector extends Component<Props, State> {
                 shouldShowGraduationLine && graduationLineCircleStyle,
                 isOutermost && outermostCircleStyle,
               ]}
-              onPress={() => { this.onPressCircle(v) }}
             />
           )
         })}

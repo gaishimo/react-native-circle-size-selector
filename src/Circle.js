@@ -1,24 +1,23 @@
 // @flow
 import React from 'react'
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
 
 type Props = {
   cx: number,
   cy: number,
   radius: number,
-  onPress: ?Function,
   style: StyleObj,
 }
 
 export default function Circle (props: Props) {
-  const { cx, cy, radius, style, onPress, ...other } = props
+  const { cx, cy, radius, style, ...other } = props
   const width = radius * 2
   const height = radius * 2
   const left = cx - radius
   const top = cy - radius
 
-  const Inner = (
+  return (
     <View
       style={[
         styles.circle,
@@ -28,16 +27,6 @@ export default function Circle (props: Props) {
       {...other}
     />
   )
-
-  if (onPress) {
-    return (
-      <TouchableWithoutFeedback onPress={onPress}>
-        {Inner}
-      </TouchableWithoutFeedback>
-    )
-  } else {
-    return Inner
-  }
 }
 
 const styles = StyleSheet.create({
