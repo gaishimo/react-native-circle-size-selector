@@ -4,11 +4,26 @@
 import React, { Component } from 'react'
 import {
   StyleSheet,
-  View
+  View,
+  Text,
 } from 'react-native'
 import CircleNumberSelector from 'react-native-circle-number-selector'
 
-export default class App extends Component<{}> {
+type State = {
+  value: number,
+}
+
+const InitialValue = 3
+
+export default class App extends Component<void, State> {
+  state: State = {
+    value: InitialValue,
+  }
+
+  onChange = (value: number) => {
+    this.setState({ value })
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -16,9 +31,13 @@ export default class App extends Component<{}> {
           <CircleNumberSelector
             minValue={1}
             maxValue={10}
-            initialValue={1}
-            onSelect={() => {}}
-          />
+            initialValue={InitialValue}
+            onChange={this.onChange}
+          >
+            <View>
+              <Text style={styles.text}>{this.state.value}</Text>
+            </View>
+          </CircleNumberSelector>
         </View>
       </View>
     )
@@ -36,5 +55,10 @@ const styles = StyleSheet.create({
     height: 300,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#F0FFFF',
   },
 })
