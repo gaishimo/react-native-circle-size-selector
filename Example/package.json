@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "cd node_modules/react-native-circle-number-selector && npm rm react-native && rm -rf Example",
+    "postinstall": "cd node_modules/react-native-circle-size-selector && npm rm react-native && rm -rf Example",
     "start": "node node_modules/react-native/local-cli/cli.js start --reset-cache",
-    "watch": "cpx --watch -u -v --include-empty-dirs '../src/**/*.js' node_modules/react-native-circle-number-selector/src/ &",
+    "watch": "cpx --watch -u -v --include-empty-dirs '../src/**/*.js' node_modules/react-native-circle-size-selector/src/ &",
     "run-ios": "react-native run-ios",
     "run-android": "react-native run-android",
     "test": "jest"
@@ -13,7 +13,7 @@
   "dependencies": {
     "react": "16.2.0",
     "react-native": "0.52.0",
-    "react-native-circle-number-selector": "file:.."
+    "react-native-circle-size-selector": "file:.."
   },
   "devDependencies": {
     "babel-jest": "22.0.4",

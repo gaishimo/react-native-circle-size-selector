@@ -7,7 +7,7 @@ import {
   View,
   Text,
 } from 'react-native'
-import CircleNumberSelector from 'react-native-circle-number-selector'
+import CircleSizeSelector from 'react-native-circle-size-selector'
 
 type State = {
   value: number,
@@ -28,7 +28,7 @@ export default class App extends Component<void, State> {
     return (
       <View style={styles.container}>
         <View style={styles.parent}>
-          <CircleNumberSelector
+          <CircleSizeSelector
             minValue={1}
             maxValue={10}
             initialValue={InitialValue}
@@ -37,7 +37,7 @@ export default class App extends Component<void, State> {
             <View>
               <Text style={styles.text}>{this.state.value}</Text>
             </View>
-          </CircleNumberSelector>
+          </CircleSizeSelector>
         </View>
       </View>
     )

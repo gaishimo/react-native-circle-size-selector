@@ -61,7 +61,7 @@ const defaultStyles = StyleSheet.create({
   },
 })
 
-export default class CircleNumberSelector extends React.Component<Props, State> {
+export default class CircleSizeSelector extends React.Component<Props, State> {
   props: Props
   state = {
     value: this.props.initialValue,

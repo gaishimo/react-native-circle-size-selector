@@ -1,2 +1,2 @@
 // @flow
-export { default } from './CircleNumberSelector'
+export { default } from './CircleSizeSelector'

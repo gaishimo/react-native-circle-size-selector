@@ -3565,7 +3565,7 @@ react-devtools-core@3.0.0:
     shell-quote "^1.6.1"
     ws "^2.0.3"
 
-"react-native-circle-number-selector@file:..":
+"react-native-circle-size-selector@file:..":
   version "1.0.0"
 
 react-native@0.52.0:
