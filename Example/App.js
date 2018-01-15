@@ -13,7 +13,7 @@ type State = {
   value: number,
 }
 
-const InitialValue = 3
+const InitialValue = 1
 
 export default class App extends Component<void, State> {
   state: State = {
@@ -30,7 +30,7 @@ export default class App extends Component<void, State> {
         <View style={styles.parent}>
           <CircleSizeSelector
             minValue={1}
-            maxValue={10}
+            maxValue={7}
             initialValue={InitialValue}
             onChange={this.onChange}
           >
@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: 'bold',
-    color: '#F0FFFF',
+    color: '#96C8C8',
   },
 })
