@@ -207,13 +207,23 @@ export default class CircleNumberSelector extends React.Component<Props, State> 
       graduationLineCircleStyle,
       currentValueCircleStyle,
       resizingCurrentValueCircleStyle,
+      children,
     } = this.props
+    const valuesInRange = this.valuesInRange
+    const valuesLength = valuesInRange.length
     return (
       <View style={styles.container} onLayout={this.onLayout}>
-        {this.valuesInRange.reverse().map((v, i) => {
+        {valuesInRange.reverse().map((v, i) => {
           const radius = this.radiusAtValue(v)
           const isOutermost = v === this.props.maxValue
-          const shouldShowGraduationLine = resizing && this.props.showGraduationLinesOnResizing
+          const shouldShowGraduationLine =
+            resizing && this.props.showGraduationLinesOnResizing
+          if (!isOutermost && !shouldShowGraduationLine) { return null }
+          if (!isOutermost && this.valuesInRange.length > 30) {
+            if (i % (valuesLength / 10) !== 0) {
+              return null
+            }
+          }
           return (
             <Circle
               key={`circle-${i}`}
