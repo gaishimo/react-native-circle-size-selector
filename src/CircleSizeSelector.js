@@ -16,8 +16,8 @@ type State = {
 }
 
 type Props = {
-  minValue: number,
-  maxValue: number,
+  minValue: ?number,
+  maxValue: ?number,
   manualValues: ?number[],
   initialValue: number,
   showGraduationLinesOnResizing: boolean,
@@ -87,12 +87,24 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
   _previousPosition: ?Position
 
   get minValue (): number {
-    if (this.props.manualValues == null) { return this.props.minValue }
-    return Math.min(...this.props.manualValues)
+    const { minValue, manualValues } = this.props
+    if (minValue == null) {
+      if (manualValues == null) {
+        throw new Error('{min|max}Value or manualValues must be set')
+      }
+      return Math.min(...manualValues)
+    }
+    return minValue
   }
   get maxValue (): number {
-    if (this.props.manualValues == null) { return this.props.maxValue }
-    return Math.max(...this.props.manualValues)
+    const { maxValue, manualValues } = this.props
+    if (maxValue == null) {
+      if (manualValues == null) {
+        throw new Error('{min|max}Value or manualValues must be set')
+      }
+      return Math.max(...manualValues)
+    }
+    return maxValue
   }
 
   get maxArea (): number {
@@ -107,12 +119,12 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
   }
 
   get valuesInRange (): number[] {
-    const { minValue, maxValue, manualValues } = this.props
+    const { manualValues } = this.props
     if (manualValues != null) {
       const sorted = manualValues.slice().sort((n1, n2) => { return n1 - n2 })
       return sorted
     }
-    return range(minValue, maxValue)
+    return range(this.minValue, this.maxValue)
   }
 
   get radiusAtCurrentValue (): number {
