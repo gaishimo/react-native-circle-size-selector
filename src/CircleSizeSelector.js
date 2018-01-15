@@ -16,8 +16,8 @@ type State = {
 }
 
 type Props = {
-  minValue: ?number,
-  maxValue: ?number,
+  minValue?: number,
+  maxValue?: number,
   manualValues: ?number[],
   initialValue: number,
   showGraduationLinesOnResizing: boolean,
