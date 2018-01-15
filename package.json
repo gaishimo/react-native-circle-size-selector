@@ -1,13 +1,39 @@
 {
-  "name": "react-native-resizable-number-selector",
+  "name": "react-native-circle-number-selector",
   "version": "1.0.0",
-  "main": "src/index.js",
-  "repository": "git@github.com:gaishimo/react-native-resizable-number-input.git",
-  "author": "gaishimo <gaithimo@gmail.com>",
   "license": "MIT",
+  "description": "React Native component to select size (number) by circle selector UI (100% Pure JS)",
+  "keywords": [
+    "react-native",
+    "react",
+    "react-component",
+    "react-native-component",
+    "mobile",
+    "ios",
+    "android",
+    "circle",
+    "size",
+    "drag",
+    "tap"
+  ],
+  "author": {
+    "name": "Toru Shimogaisho",
+    "email": "gaithimo@gmail.com"
+  },
+  "homepage": "https://github.com/gaishimo/react-native-circle-size-selector/",
+  "bugs": "https://github.com/gaishimo/react-native-circle-size-selector/issues",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gaishimo/react-native-circle-size-selector.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "flow": "flow"
+  },
   "peerDependencies": {
     "react": "*",
-    "react-native": ">=0.50.0"
+    "react-native": "*"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
