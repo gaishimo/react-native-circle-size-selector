@@ -1,5 +1,5 @@
 {
-  "name": "react-native-circle-number-selector",
+  "name": "react-native-circle-size-selector",
   "version": "1.0.0",
   "license": "MIT",
   "description": "React Native component to select size (number) by circle selector UI (100% Pure JS)",
