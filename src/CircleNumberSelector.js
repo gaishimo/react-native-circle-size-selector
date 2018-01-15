@@ -20,6 +20,8 @@ type Props = {
   maxValue: number,
   initialValue: number,
   showGraduationLinesOnResizing: boolean,
+  onChange: (value: number) => void,
+  onSelected: (value: number) => void,
   outermostCircleStyle: StyleObj,
   graduationLineCircleStyle: StyleObj,
   currentValueCircleStyle: StyleObj,
@@ -28,6 +30,8 @@ type Props = {
 
 type DefaultProps = {
   showGraduationLinesOnResizing: boolean,
+  onChange: (value: number) => void,
+  onSelected: (value: number) => void,
   outermostCircleStyle: StyleObj,
   graduationLineCircleStyle: StyleObj,
   currentValueCircleStyle: StyleObj,
@@ -69,6 +73,8 @@ export default class CircleNumberSelector extends Component<Props, State> {
     graduationLineCircleStyle: defaultStyles.graduationLineCircle,
     currentValueCircleStyle: defaultStyles.currentValueCircle,
     resizingCurrentValueCircleStyle: defaultStyles.resizingCurrentValueCircle,
+    onChange: () => {},
+    onSelected: () => {},
   }
 
   _panResponder: any
@@ -109,8 +115,8 @@ export default class CircleNumberSelector extends Component<Props, State> {
       onPanResponderGrant: this.onPanResponderGrant,
       onPanResponderMove: this.onPanResponderMove,
       onPanResponderTerminationRequest: () => true,
-      onPanResponderRelease: this.onPanResponderEnd,
-      onPanResponderTerminate: this.onPanResponderEnd,
+      onPanResponderRelease: this.onPanResponderRelease,
+      onPanResponderTerminate: this.onPanResponderTerminate,
       onShouldBlockNativeResponder: () => true,
     })
   }
@@ -128,6 +134,12 @@ export default class CircleNumberSelector extends Component<Props, State> {
 
   getAreaAtValue (value: number): number {
     return this.maxArea * (value / this.props.maxValue)
+  }
+
+  clear () {
+    this._previousPosition = null
+    this._tapStartPosition = null
+    this.setState({ resizing: false })
   }
 
   onLayout = (e: Object) => {
@@ -175,12 +187,16 @@ export default class CircleNumberSelector extends Component<Props, State> {
     if (expanding && value <= this.state.value) { return }
     if (!expanding && value >= this.state.value) { return }
     this.setState({ value })
+    this.props.onChange(value)
   }
 
-  onPanResponderEnd = () => {
-    this._previousPosition = null
-    this._tapStartPosition = null
-    this.setState({ resizing: false })
+  onPanResponderRelease = () => {
+    this.clear()
+    this.props.onSelected(this.state.value)
+  }
+
+  onPanResponderTerminate = () => {
+    this.clear()
   }
 
   render () {
