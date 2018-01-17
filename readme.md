@@ -19,29 +19,37 @@ npm install --save react-native-circle-size-selector
 ```js
 import CircleSizeSelector from 'react-native-circle-size-selector'
 
-export default class App extends Component<void, State> {
-  state: State = {
-    value: InitialValue,
+export default class App extends Component {
+  state = {
+    value: 3,
   }
 
-  onChange = (value: number) => {
+  onChange = (value) => {
     this.setState({ value })
   }
 
   render () {
     return (
-      <View style={styles.parent}>
+      <View style={styles.container}>
         <CircleSizeSelector
           minValue={1}
           maxValue={7}
-          initialValue={1}
+          initialValue={3}
           onChange={this.onChange}
         />
-        <Text>{this.state}</Text>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+});
 ```
 
 ## Advanced Usage
