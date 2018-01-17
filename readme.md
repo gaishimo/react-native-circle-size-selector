@@ -75,7 +75,7 @@ You can render elements in the circle by adding children.
   ...
 >
   <View>
-    <Text style={styles.text}>
+    <Text>
       {this.state.value}
     </Text>
   </View>
