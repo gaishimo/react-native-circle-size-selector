@@ -87,7 +87,7 @@ You can render elements in the circle by adding children.
 | Prop | Type | Default Value | Description |
 |--|--|--|--|
 | minValue | number |  | The minimum value of the range. This is required when manualValues is not set. |
-| manValue | number |  | The maximum value of the range. This is required when manualValues is not set. |
+| maxValue | number |  | The maximum value of the range. This is required when manualValues is not set. |
 | manualValues | number  |   | The values that user can select. If you use this, you don't need to set minValue and maxValue. |
 | initialValue | number  |   | first value |
 | showGraduationLinesOnResizing | boolean |  true | a boolean that defines if we show graduation lines on resizing |
