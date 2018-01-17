@@ -1,6 +1,6 @@
 # react-native-circle-size-selector
 
-React Native component to select number (size) by circle (100% Pure JS)
+React Native component to select number (size) with circle dragging (100% Pure JS)
 
 ## Preview
 
