@@ -131,7 +131,7 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     return this.radiusAtValue(this.state.value)
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this._panResponder = this.createPanResponder()
   }
 
