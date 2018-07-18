@@ -1,13 +1,12 @@
 // @flow
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
+import { View, StyleSheet, ViewPropTypes } from 'react-native'
 
 type Props = {
   cx: number,
   cy: number,
   radius: number,
-  style: StyleObj,
+  style: ViewPropTypes.style,
 }
 
 export default function Circle (props: Props) {
