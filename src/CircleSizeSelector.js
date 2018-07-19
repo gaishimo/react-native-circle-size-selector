@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import { StyleSheet, View, ViewPropTypes, PanResponder } from 'react-native'
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes'
 import Circle from './Circle'
 import { range, getDistance } from './Utils'
 
@@ -23,10 +22,10 @@ type Props = {
   showGraduationLinesOnResizing: boolean,
   onChange: (value: number) => void,
   onSelected: (value: number) => void,
-  outermostCircleStyle: StyleObj,
-  graduationLineCircleStyle: StyleObj,
-  currentValueCircleStyle: StyleObj,
-  resizingCurrentValueCircleStyle: StyleObj,
+  outermostCircleStyle: ViewPropTypes.style,
+  graduationLineCircleStyle: ViewPropTypes.style,
+  currentValueCircleStyle: ViewPropTypes.style,
+  resizingCurrentValueCircleStyle: ViewPropTypes.style,
   children?: React.Node,
 }
 
