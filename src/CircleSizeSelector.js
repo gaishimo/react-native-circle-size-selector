@@ -211,7 +211,7 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     }
     const previousRadius = getDistance(
       this.centerPosition,
-      this._previousPosition
+      this._previousPosition,
     )
     const radius = getDistance(this.centerPosition, position)
 
