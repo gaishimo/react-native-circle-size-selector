@@ -1,8 +1,8 @@
 // @flow
-import * as React from 'react'
-import { StyleSheet, View, ViewPropTypes, PanResponder } from 'react-native'
-import Circle from './Circle'
-import { range, getDistance } from './Utils'
+import * as React from "react"
+import { StyleSheet, View, ViewPropTypes, PanResponder } from "react-native"
+import Circle from "./Circle"
+import { range, getDistance } from "./Utils"
 
 type Position = { x: number, y: number }
 type GestureState = { dx: number, dy: number }
@@ -17,7 +17,7 @@ type State = {
 type Props = {
   minValue?: number,
   maxValue?: number,
-  manualValues: ?number[],
+  manualValues: ?(number[]),
   initialValue: number,
   showGraduationLinesOnResizing: boolean,
   onChange: (value: number) => void,
@@ -30,7 +30,7 @@ type Props = {
 }
 
 type DefaultProps = {
-  manualValues: ?number[],
+  manualValues: ?(number[]),
   showGraduationLinesOnResizing: boolean,
   onChange: (value: number) => void,
   onSelected: (value: number) => void,
@@ -43,20 +43,20 @@ type DefaultProps = {
 const defaultStyles = StyleSheet.create({
   outermostCircle: {
     borderWidth: 2,
-    borderColor: 'rgb(240, 240, 240)',
-    backgroundColor: 'rgb(247, 247, 247)',
+    borderColor: "rgb(240, 240, 240)",
+    backgroundColor: "rgb(247, 247, 247)",
   },
   graduationLineCircle: {
     borderWidth: 1,
-    borderColor: 'rgb(230, 230, 230)',
+    borderColor: "rgb(230, 230, 230)",
   },
   currentValueCircle: {
     borderWidth: 1,
-    borderColor: 'rgb(200, 240, 240)',
-    backgroundColor: 'rgba(201, 250, 245, 0.8)',
+    borderColor: "rgb(200, 240, 240)",
+    backgroundColor: "rgba(201, 250, 245, 0.8)",
   },
   resizingCurrentValueCircle: {
-    backgroundColor: 'rgba(187, 232, 227, 0.6)',
+    backgroundColor: "rgba(187, 232, 227, 0.6)",
   },
 })
 
@@ -80,7 +80,7 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     onSelected: () => {},
   }
 
-  constructor (props: Props) {
+  constructor(props: Props) {
     super(props)
     this._panResponder = this.createPanResponder()
   }
@@ -90,52 +90,56 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
   _tapStartPosition: ?Position
   _previousPosition: ?Position
 
-  get minValue (): number {
+  get minValue(): number {
     const { minValue, manualValues } = this.props
     if (minValue == null) {
       if (manualValues == null) {
-        throw new Error('{min|max}Value or manualValues must be set')
+        throw new Error("{min|max}Value or manualValues must be set")
       }
       return Math.min(...manualValues)
     }
     return minValue
   }
-  get maxValue (): number {
+  get maxValue(): number {
     const { maxValue, manualValues } = this.props
     if (maxValue == null) {
       if (manualValues == null) {
-        throw new Error('{min|max}Value or manualValues must be set')
+        throw new Error("{min|max}Value or manualValues must be set")
       }
       return Math.max(...manualValues)
     }
     return maxValue
   }
 
-  get maxArea (): number {
+  get maxArea(): number {
     const radius = this.maxRadius
     return radius * radius * Math.PI
   }
 
-  get maxRadius (): number { return this.state.width / 2 }
+  get maxRadius(): number {
+    return this.state.width / 2
+  }
 
-  get centerPosition (): Position {
+  get centerPosition(): Position {
     return { x: this.state.width / 2, y: this.state.height / 2 }
   }
 
-  get valuesInRange (): number[] {
+  get valuesInRange(): number[] {
     const { manualValues } = this.props
     if (manualValues != null) {
-      const sorted = manualValues.slice().sort((n1, n2) => { return n1 - n2 })
+      const sorted = manualValues.slice().sort((n1, n2) => {
+        return n1 - n2
+      })
       return sorted
     }
     return range(this.minValue, this.maxValue)
   }
 
-  get radiusAtCurrentValue (): number {
+  get radiusAtCurrentValue(): number {
     return this.radiusAtValue(this.state.value)
   }
 
-  createPanResponder () {
+  createPanResponder() {
     return PanResponder.create({
       onStartShouldSetPanResponder: () => true,
       onStartShouldSetPanResponderCapture: () => true,
@@ -150,22 +154,24 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     })
   }
 
-  radiusAtValue (v: number) {
+  radiusAtValue(v: number) {
     const area = this.getAreaAtValue(v)
     return Math.sqrt(area / Math.PI)
   }
 
-  selectValueFromRadius (radius: number) {
+  selectValueFromRadius(radius: number) {
     const found = this.valuesInRange.find(v => this.radiusAtValue(v) >= radius)
-    if (found != null) { return found }
+    if (found != null) {
+      return found
+    }
     return this.maxValue
   }
 
-  getAreaAtValue (value: number): number {
+  getAreaAtValue(value: number): number {
     return this.maxArea * (value / this.maxValue)
   }
 
-  clear () {
+  clear() {
     this._previousPosition = null
     this._tapStartPosition = null
     this.setState({ resizing: false })
@@ -193,7 +199,7 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
   onPanResponderMove = (e: Object, gestureState: GestureState) => {
     const { dx, dy } = gestureState
     if (this._tapStartPosition == null) {
-      throw new Error('_tapStartPosition is null')
+      throw new Error("_tapStartPosition is null")
     }
     const position = {
       x: this._tapStartPosition.x + dx,
@@ -204,7 +210,9 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
       return
     }
     const previousRadius = getDistance(
-      this.centerPosition, this._previousPosition)
+      this.centerPosition,
+      this._previousPosition
+    )
     const radius = getDistance(this.centerPosition, position)
 
     const expanding = radius >= previousRadius
@@ -212,8 +220,12 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     const value = this.selectValueFromRadius(radius)
     this._value = value
     this._previousPosition = position
-    if (expanding && value <= this.state.value) { return }
-    if (!expanding && value >= this.state.value) { return }
+    if (expanding && value <= this.state.value) {
+      return
+    }
+    if (!expanding && value >= this.state.value) {
+      return
+    }
     this.setState({ value })
     this.props.onChange(value)
   }
@@ -227,7 +239,7 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     this.clear()
   }
 
-  render () {
+  render() {
     const { resizing } = this.state
     const {
       outermostCircleStyle,
@@ -245,7 +257,9 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
           const isOutermost = v === this.maxValue
           const shouldShowGraduationLine =
             resizing && this.props.showGraduationLinesOnResizing
-          if (!isOutermost && !shouldShowGraduationLine) { return null }
+          if (!isOutermost && !shouldShowGraduationLine) {
+            return null
+          }
           if (!isOutermost && valuesLength > 30) {
             if (i % (valuesLength / 10) !== 0) {
               return null
@@ -265,7 +279,7 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
           )
         })}
         <Circle
-          key={'circle-current-value'}
+          key={"circle-current-value"}
           cx={this.centerPosition.x}
           cy={this.centerPosition.y}
           radius={this.radiusAtCurrentValue}
@@ -284,8 +298,8 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignSelf: "stretch",
+    alignItems: "center",
+    justifyContent: "center",
   },
 })
