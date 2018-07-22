@@ -4,17 +4,19 @@ module.exports = {
     'standard',
     'plugin:react/recommended',
     'plugin:react-native/all',
+    "plugin:prettier/recommended",
+    "prettier/standard",
   ],
   plugins: [
     'flowtype',
     'react',
-    'react-native'
+    'react-native',
+    'prettier',
   ],
   env: {
     jest: true,
   },
   rules: {
-    'comma-dangle': 'off',
     'react/display-name': 'off',
     'react/jsx-boolean-value': 'error',
     'react/default-props-match-prop-types': 'error',
