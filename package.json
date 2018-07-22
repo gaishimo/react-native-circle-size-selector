@@ -30,7 +30,8 @@
   "scripts": {
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
-    "flow": "flow"
+    "flow": "flow",
+    "precommit": "pretty-quick --staged"
   },
   "peerDependencies": {
     "react": "*",
