@@ -5,14 +5,10 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react-native/all",
     "plugin:prettier/recommended",
+    "prettier/flowtype",
     "prettier/standard",
   ],
-  plugins: [
-    "flowtype",
-    "react",
-    "react-native",
-    "prettier",
-  ],
+  plugins: ["flowtype", "react", "react-native"],
   env: {
     jest: true,
   },
@@ -28,6 +24,9 @@ module.exports = {
     "react-native/no-color-literals": "off",
     "flowtype/define-flow-type": 1,
     "flowtype/use-flow-type": 1,
-    "import/no-unresolved": ["error", { ignore: ["^react$", "^react-native$"] }]
+    "import/no-unresolved": [
+      "error",
+      { ignore: ["^react$", "^react-native$"] },
+    ],
   },
 }
