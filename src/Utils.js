@@ -1,7 +1,7 @@
 // @flow
 export const range = (start: number, end: number) => {
   if (start > end) {
-    throw new Error('second argument should be more than first argument')
+    throw new Error("second argument should be more than first argument")
   }
   const array = []
   for (var i = start; i <= end; i++) {

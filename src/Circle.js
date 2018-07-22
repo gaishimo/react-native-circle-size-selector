@@ -1,6 +1,6 @@
 // @flow
-import React from 'react'
-import { View, StyleSheet, ViewPropTypes } from 'react-native'
+import React from "react"
+import { View, StyleSheet, ViewPropTypes } from "react-native"
 
 type Props = {
   cx: number,
@@ -9,7 +9,7 @@ type Props = {
   style: ViewPropTypes.style,
 }
 
-export default function Circle (props: Props) {
+export default function Circle(props: Props) {
   const { cx, cy, radius, style, ...other } = props
   const width = radius * 2
   const height = radius * 2
@@ -29,5 +29,5 @@ export default function Circle (props: Props) {
 }
 
 const styles = StyleSheet.create({
-  circle: { position: 'absolute' },
+  circle: { position: "absolute" },
 })
