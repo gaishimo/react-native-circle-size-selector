@@ -80,6 +80,11 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
     onSelected: () => {},
   }
 
+  constructor (props: Props) {
+    super(props)
+    this._panResponder = this.createPanResponder()
+  }
+
   _panResponder: any
   _value: number
   _tapStartPosition: ?Position
@@ -128,10 +133,6 @@ export default class CircleSizeSelector extends React.Component<Props, State> {
 
   get radiusAtCurrentValue (): number {
     return this.radiusAtValue(this.state.value)
-  }
-
-  componentDidMount () {
-    this._panResponder = this.createPanResponder()
   }
 
   createPanResponder () {
