@@ -1,6 +1,6 @@
 {
   "name": "react-native-circle-size-selector",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "description": "React Native component to select number (size) with circle dragging (100% Pure JS)",
   "keywords": [
