@@ -29,6 +29,7 @@
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "flow": "flow"
   },
   "peerDependencies": {
