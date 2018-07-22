@@ -33,6 +33,16 @@
     "flow": "flow",
     "precommit": "pretty-quick --staged"
   },
+  "changelog": {
+    "labels": {
+      "Type: Breaking Change": "Breaking Change",
+      "Type: Feature": "Feature",
+      "Type: Bug": "Bug Fix",
+      "Type: Maintenance": "Maintenance",
+      "Type: Documentation": "Documentation",
+      "Type: Refactoring": "Refactoring"
+    }
+  },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
